@@ -9,9 +9,9 @@ class CovidController extends Controller
 {
     public function index ()
     {
-        $Covids = Covid::all();
+        $covids = Covid::all();
         
-        if(count($Covids)==0){
+        if(count($covids)==0){
             $response = [
                 'message' => 'Data is empty'
             ];
@@ -21,7 +21,7 @@ class CovidController extends Controller
         else{
             $response = [
                 'message' => 'Get all resouce',
-                'data'=> $Covids,
+                'data'=> $covids,
             ];
             return response()->json($response,200);
         }
@@ -33,21 +33,21 @@ class CovidController extends Controller
             'addres' => 'required',
             'status'=> 'required'
         ]);
-        $Covids = Covid::create($request->all());
+        $covids = Covid::create($request->all());
 
         $response = [
             'message'=>'Resource is added succesfully',
-            'data'=> $Covids,
+            'data'=> $covids,
         ];
         return response()->json($response, 201);
     }
     public function show($id) {
-        $Covids = covid::find($id);
+        $covids = Covid::find($id);
 
-        if ($Covids){
+        if ($covids){
             $response = [
                 'message'=>'Get detail resource',
-                'data'=> $Covids
+                'data'=> $covids
             ];
             return response()->json($response,200);
         }
@@ -59,12 +59,12 @@ class CovidController extends Controller
         }
     }
     public function update(request $request, $id){
-        $Covids = Covid::find($id);
-        if($Covids){
-            $Covids->update($request->all());
+        $covids = Covid::find($id);
+        if($covids){
+            $covids->update($request->all());
             $response = [
                 'message'=>'resource is update succesully',
-                'data'=>$Covids
+                'data'=>$covids
                 ];
                 return response()->json($request,200);
         }
@@ -76,9 +76,9 @@ class CovidController extends Controller
         }
     }
     public function destroy($id){
-        $Covids = Covid::find($id);
-        if ($Covids){
-            $Covids->delete($id);
+        $covids = Covid::find($id);
+        if ($covids){
+            $covids->delete($id);
             $response = [
                 'message'=>'resource is delete succesfully'
             ];
@@ -91,11 +91,11 @@ class CovidController extends Controller
         }
     }
     public function search($Name){
-        $Covids = Covid::where('Name', 'like', '%' . $Name . '%')->get();
-        if($Covids){
+        $covids = Covid::where('Name', 'like', '%' . $Name . '%')->get();
+        if($covids){
             $response = [
                 'message'=>'get searched resource',
-                'data'=> $Covids
+                'data'=> $covids
             ];
             return response()->json($response, 200);
         }
@@ -108,11 +108,11 @@ class CovidController extends Controller
     }
     public function searchstatus($status)
     {
-        $Covids = Covid::where('status','like','%' . $status . '%')->get();
+        $covids = Covid::where('status','like','%' . $status . '%')->get();
         if ($covids){
             $response = [
             'message'=> 'Get'.' '.$status.' '.'reource',
-            'data'=>$Covids
+            'data'=>$covids
             ];
             return response()->json($response,200);
         }
